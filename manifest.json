@@ -1,0 +1,25 @@
+{
+    "name": "Accessibility Tracker",
+    "version": "1.0.0",
+    "description": "A web application to track and report accessibility issues.",
+    "manifest_version": 3,
+    "author": "Lazontez",
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Accessibility Tracker"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content.js"]
+        }
+    ]
+}

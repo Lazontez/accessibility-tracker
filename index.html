@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Accessibility Tracker</h1>
+        <p>Helping small businesses improve their web accessibility.</p>
+    </header>
+    <main>
+        <section class="summary">
+            <h2>Summary</h2>
+            <p><strong>Issues Found:</strong> 5</p>
+            <p><strong>Pages Scanned:</strong> 3</p>
+        </section>
+        <section class="issues">
+            <h2>Accessibility Issues</h2>
+            <ul>
+                <li>Missing alt text on images (<span id="altImageIssueCount"></span> instances)</li>
+                <li>Low contrast text (<span id="lowContrastCount"></span> instances)</li>
+                <li>Missing form labels (2 instances)</li>
+            </ul>
+        </section>
+        <button id="scan-button">Run Accessibility Scan</button>
+    </main>
+    <footer>
+        <p>&copy; 2025 Accessibility Tracker. Empowering small businesses.</p>
+    </footer>
+    <script src="main.js" ></script>
+</body>
+</html>
