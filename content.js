@@ -2,7 +2,8 @@ function findAccessibilityIssues() {
     const issues = {
         "missingAltText": findImagesWithoutAlt(),
         "lowContrast": findLowContrast(),
-        "missingLabels": findMissingLabels()
+        "missingLabels": findMissingLabels(),
+        "nonKeyboardAccessible": findNonKeyboardAccessibleElements()
     }; 
     return issues;
 }
@@ -110,3 +111,39 @@ function findMissingLabels(){
 
     return issues;
 }
+
+function findNonKeyboardAccessibleElements() {
+    const issues = [];
+    const focusableSelectors = [
+        "a[href]", 
+        "button",
+        "input:not([type='hidden'])", 
+        "select", 
+        "textarea", 
+        "[tabindex]" 
+    ];
+
+    const elements = document.querySelectorAll(focusableSelectors.join(","));
+
+    elements.forEach(element => {
+        const tabindex = element.getAttribute("tabindex");
+
+        // Check if the element is focusable
+        const isFocusable =
+            tabindex !== null || 
+            element.tagName === "A" && element.hasAttribute("href") || 
+            element.tagName === "BUTTON" || 
+            element.tagName === "INPUT" && element.type !== "hidden" || 
+            element.tagName === "SELECT" || 
+            element.tagName === "TEXTAREA"; 
+
+        if (!isFocusable || tabindex === "-1") {
+            issues.push({
+                element: element.outerHTML,
+                message: "Element is not keyboard accessible"
+            });
+        }
+    });
+    return issues;
+}
+
