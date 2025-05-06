@@ -10,7 +10,7 @@ document.getElementById("scan-button").addEventListener("click", function () {
             files: ["content.js"]
         });
     });
-    
+
 });
 
 // Track the number of pages scanned
@@ -36,7 +36,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         const totalIssues =
             results['missingAltText'].length +
             results['lowContrast'].length +
-            results['missingLabels'].length;
+            results['missingLabels'].length + 
+            results['nonKeyboardAccessible'];
 
         // Update the summary
         document.querySelector(".summary p").innerHTML = `<strong>Issues Found:</strong> ${totalIssues}`;
@@ -45,7 +46,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         pagesScanned += 1;
         document.querySelector(".summary p:nth-of-type(2)").innerHTML = `<strong>Pages Scanned:</strong> ${pagesScanned}`;
         const endResults = {
-            "totalIssues": totalIssues, 
+            "totalIssues": totalIssues,
             "pagesScanned": pagesScanned,
             "issues": results
         }
