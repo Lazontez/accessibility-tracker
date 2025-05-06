@@ -11,25 +11,37 @@ document.getElementById("scan-button").addEventListener("click", function () {
     });
 });
 
+// Track the number of pages scanned
+let pagesScanned = 0;
+
 // Listen for messages from the content script
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log("Message received from content script:", message);
     if (message.type === "accessibilityScanResults") {
+        let results = message.issues;
 
-        let results = message.issues
+        // Update individual issue counts
         const altImageCount = document.getElementById("altImageIssueCount");
         altImageCount.innerHTML = results['missingAltText'].length;
+
         const lowContrastCount = document.getElementById("lowContrastCount");
         lowContrastCount.innerHTML = results['lowContrast'].length;
-        // message.issues.forEach(issue => {
 
-        //     const li = document.createElement("li");
-        //     li.textContent = `${issue.type} (${issue.count} instances)`;
-        //     issuesList.appendChild(li);
-        // });
+        const missingLabelCount = document.getElementById("missingLabelsCount");
+        missingLabelCount.innerHTML = results['missingLabels'].length;
+
+        // Calculate total issues
+        const totalIssues =
+            results['missingAltText'].length +
+            results['lowContrast'].length +
+            results['missingLabels'].length;
 
         // Update the summary
-        document.querySelector(".summary p").innerHTML = `<strong>Issues Found:</strong> ${message.issues.length}`;
+        document.querySelector(".summary p").innerHTML = `<strong>Issues Found:</strong> ${totalIssues}`;
+
+        // Increment and update the pages scanned count
+        pagesScanned += 1;
+        document.querySelector(".summary p:nth-of-type(2)").innerHTML = `<strong>Pages Scanned:</strong> ${pagesScanned}`;
     }
 });
 

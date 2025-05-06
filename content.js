@@ -1,7 +1,8 @@
 function findAccessibilityIssues() {
     const issues = {
         "missingAltText": findImagesWithoutAlt(),
-        "lowContrast": findLowContrast()
+        "lowContrast": findLowContrast(),
+        "missingLabels": findMissingLabels()
     }; 
     return issues;
 }
@@ -89,4 +90,23 @@ function getLuminance(rgb) {
 function parseColor(color) {
     const rgbMatch = color.match(/rgba?\((\d+), (\d+), (\d+)/);
     return rgbMatch ? rgbMatch.slice(1, 4).map(Number) : [255, 255, 255]; 
+}
+
+
+function findMissingLabels(){
+    const issues = []; 
+
+    // Form elements without labels
+    const formElements = document.querySelectorAll("input:not([type='hidden']), select, textarea, button");
+    formElements.forEach(element => {
+        const label = document.querySelector(`label[for="${element.id}"]`);
+        if (!label && element.tagName !== "BUTTON") {
+            issues.push({
+                element: element.outerHTML,
+                message: "Missing label"
+            });
+        }
+    });
+
+    return issues;
 }
