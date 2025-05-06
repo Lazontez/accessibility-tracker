@@ -36,20 +36,48 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         const totalIssues =
             results['missingAltText'].length +
             results['lowContrast'].length +
-            results['missingLabels'].length + 
+            results['missingLabels'].length +
             results['nonKeyboardAccessible'];
 
+        // Calculate the score
+        const maxScore = 100;
+        const deductions = (
+            (results['missingAltText'].length * 1) +
+            (results['lowContrast'].length * 2) +
+            (results['missingLabels'].length * 3) +
+            (results['nonKeyboardAccessible'] * 4)
+        );
+        const finalScore = Math.max(0, maxScore - deductions);
+
+        // Assign a grade based on the score
+        let grade;
+        if (finalScore >= 90) grade = "A";
+        else if (finalScore >= 80) grade = "B";
+        else if (finalScore >= 70) grade = "C";
+        else if (finalScore >= 60) grade = "D";
+        else grade = "F";
+
         // Update the summary
-        document.querySelector(".summary p").innerHTML = `<strong>Issues Found:</strong> ${totalIssues}`;
+        document.querySelector(".summary p").innerHTML = `
+            <strong>Issues Found:</strong> ${totalIssues} <br>
+            <strong>Score:</strong> ${finalScore} <br>
+            <strong>Grade:</strong> ${grade}
+        `;
 
         // Increment and update the pages scanned count
         pagesScanned += 1;
-        document.querySelector(".summary p:nth-of-type(2)").innerHTML = `<strong>Pages Scanned:</strong> ${pagesScanned}`;
+        document.querySelector(".summary p:nth-of-type(2)").innerHTML = `
+            <strong>Pages Scanned:</strong> ${pagesScanned}
+        `;
+
+        // Pass the grade and score to the PDF generator
         const endResults = {
             "totalIssues": totalIssues,
             "pagesScanned": pagesScanned,
-            "issues": results
-        }
-        createPDF(endResults)
+            "issues": results,
+            "score": finalScore,
+            "grade": grade
+        };
+        createPDF(endResults);
     }
 });
