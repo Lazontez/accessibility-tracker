@@ -1,3 +1,4 @@
+import createPDF from "./pdfGenerator.js";
 // Listen for button click
 document.getElementById("scan-button").addEventListener("click", function () {
     console.log("Scan button clicked");
@@ -9,6 +10,7 @@ document.getElementById("scan-button").addEventListener("click", function () {
             files: ["content.js"]
         });
     });
+    
 });
 
 // Track the number of pages scanned
@@ -42,10 +44,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         // Increment and update the pages scanned count
         pagesScanned += 1;
         document.querySelector(".summary p:nth-of-type(2)").innerHTML = `<strong>Pages Scanned:</strong> ${pagesScanned}`;
+        const endResults = {
+            "totalIssues": totalIssues, 
+            "pagesScanned": pagesScanned,
+            "issues": results
+        }
+        createPDF(endResults)
     }
 });
-
-function findIssues(){
-    console.log("Finding Issues...")
-
-}
