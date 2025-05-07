@@ -22,7 +22,6 @@ export default function createPDF(report) {
     pdf.setLineWidth(0.5);
     pdf.line(10, 35, 200, 35);
 
-    // Summary Section
     pdf.setFontSize(18);
     pdf.setFont("helvetica", "bold");
     pdf.setTextColor(0, 0, 0); // Black text
@@ -31,7 +30,7 @@ export default function createPDF(report) {
     pdf.setFontSize(12);
     pdf.setFont("helvetica", "normal");
     pdf.text(`Issues Found: ${report.totalIssues}`, 10, 55);
-    pdf.text(`Times Scanned: ${report.pagesScanned}`, 10, 63); 
+    pdf.text(`Times Scanned: ${report.pagesScanned}`, 10, 63);
     pdf.text(`Score: ${report.score}`, 10, 71);
     pdf.text(`Grade: ${report.grade}`, 10, 79);
 
@@ -79,6 +78,34 @@ export default function createPDF(report) {
     pdf.setFont("helvetica", "italic");
     pdf.setTextColor(100, 100, 100); // Gray text
     pdf.text("Keyboard navigation is essential for users with motor impairments.", 16, 160);
+
+
+    // Score Section
+    pdf.setFillColor(22, 160, 133); // Teal color
+    pdf.roundedRect(10, 180, 190, 30,1.5,1.5, 'F');
+
+    pdf.setFontSize(20);
+    pdf.setFont("helvetica", 'bold');
+    pdf.setTextColor(255, 255, 255); 
+    pdf.text(`Accessbility \nScore`, 20 , 193)
+
+    pdf.setFontSize(40);
+    pdf.setFont("helvetica", 'bold');
+    pdf.text(`${report.grade}`, 85, 197);
+
+    pdf.setFontSize(16);
+    pdf.setFont("helvetica", 'normal');
+    pdf.setTextColor(255, 255, 255); 
+    pdf.text(`Improving accessibilty helps\nall users and boosts SEO.`, 120 , 192)
+
+    
+
+
+
+    
+
+    
+
 
     // Detailed Elements Section
     pdf.addPage(); // Add a new page for detailed elements
