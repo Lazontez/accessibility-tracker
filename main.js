@@ -66,8 +66,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         // Increment and update the pages scanned count
         pagesScanned += 1;
         document.querySelector(".summary p:nth-of-type(2)").innerHTML = `
-            <strong>Pages Scanned:</strong> ${pagesScanned}
-        `;
+            <strong>Times Scanned:</strong> ${pagesScanned} `;
 
         // Pass the grade and score to the PDF generator
         const endResults = {

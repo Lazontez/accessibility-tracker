@@ -31,12 +31,12 @@ export default function createPDF(report) {
     pdf.setFontSize(12);
     pdf.setFont("helvetica", "normal");
     pdf.text(`Issues Found: ${report.totalIssues}`, 10, 55);
-    pdf.text(`Pages Scanned: ${report.pagesScanned}`, 10, 63);
+    pdf.text(`Times Scanned: ${report.pagesScanned}`, 10, 63); 
     pdf.text(`Score: ${report.score}`, 10, 71);
     pdf.text(`Grade: ${report.grade}`, 10, 79);
 
     // Add a light gray background for the "Accessibility Issues" section
-    pdf.setFillColor(240, 240, 240); // Light gray
+    pdf.setFillColor(240, 240, 240); // Light gray-
     pdf.rect(0, 85, 210, 10, 'F'); // Full-width rectangle for the section header
 
     // Accessibility Issues Section
