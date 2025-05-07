@@ -2,7 +2,6 @@ import createPDF from "./pdfGenerator.js";
 // Listen for button click
 document.getElementById("scan-button").addEventListener("click", function () {
     console.log("Scan button clicked");
-
     // Trigger the content script
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         chrome.scripting.executeScript({
@@ -37,7 +36,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             results['missingAltText'].length +
             results['lowContrast'].length +
             results['missingLabels'].length +
-            results['nonKeyboardAccessible'];
+            results['nonKeyboardAccessible'].length;
 
         // Calculate the score
         const maxScore = 100;
@@ -45,10 +44,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             (results['missingAltText'].length * 1) +
             (results['lowContrast'].length * 2) +
             (results['missingLabels'].length * 3) +
-            (results['nonKeyboardAccessible'] * 4)
+            (results['nonKeyboardAccessible'].length * 4)
         );
-        const finalScore = Math.max(0, maxScore - deductions);
-
+        const finalScore = Math.max(0, maxScore - (deductions > 80 ? 80 : deductions))
+     
         // Assign a grade based on the score
         let grade;
         if (finalScore >= 90) grade = "A";
