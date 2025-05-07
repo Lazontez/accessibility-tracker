@@ -1,3 +1,5 @@
+console.log('Content Script Running')
+
 function findAccessibilityIssues() {
     const issues = {
         "missingAltText": findImagesWithoutAlt(),
@@ -8,11 +10,11 @@ function findAccessibilityIssues() {
     return issues;
 }
 
-const issues = findAccessibilityIssues();
+issues = findAccessibilityIssues();
 chrome.runtime.sendMessage({ type: "accessibilityScanResults", issues });
 
 
-// Individual functions to find specific accessibility issues
+// Find Images without alt attributes
 function findImagesWithoutAlt() {
     const issues = []; 
 
@@ -28,7 +30,7 @@ function findImagesWithoutAlt() {
     return issues;
 }
 
-
+//Low Contrast Issues
 function findLowContrast() {
     const issues = [];
     const elements = document.querySelectorAll("h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, button, label");
@@ -93,7 +95,7 @@ function parseColor(color) {
     return rgbMatch ? rgbMatch.slice(1, 4).map(Number) : [255, 255, 255]; 
 }
 
-
+// Find missing lebels for input fields
 function findMissingLabels(){
     const issues = []; 
 
@@ -111,7 +113,7 @@ function findMissingLabels(){
 
     return issues;
 }
-
+// Keyboard functions that are not accessible
 function findNonKeyboardAccessibleElements() {
     const issues = [];
     const focusableSelectors = [
@@ -146,5 +148,4 @@ function findNonKeyboardAccessibleElements() {
     });
     return issues;
 }
-
 
