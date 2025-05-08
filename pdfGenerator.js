@@ -3,7 +3,7 @@ export default function createPDF(report) {
     const pdf = new window.jspdf.jsPDF();
 
     // 
-    pdf.setFillColor('#046492'); 
+    pdf.setFillColor('#046492');
     pdf.rect(0, 0, 210, 32, 'F'); // Full-width rectangle for the header
 
     // Title Section
@@ -36,8 +36,8 @@ export default function createPDF(report) {
     pdf.text(`Grade: ${report.grade}`, 10, 79);
 
     // Add a light gray background for the "Accessibility Issues" section
-    pdf.setFillColor(240, 240, 240); // Light gray-
-    pdf.rect(0, 85, 210, 10, 'F'); // Full-width rectangle for the section header
+    pdf.setFillColor(240, 240, 240);
+    pdf.rect(0, 85, 210, 10, 'F');
 
     // Accessibility Issues Section
     pdf.setFontSize(16);
@@ -50,45 +50,45 @@ export default function createPDF(report) {
     pdf.setFont("helvetica", "normal");
     pdf.text(`1. Found ${report.issues['missingAltText'].length} images with missing alt text.`, 10, 102);
     pdf.setFont("helvetica", "italic");
-    pdf.setTextColor(100, 100, 100); // Gray text
+    pdf.setTextColor(100, 100, 100);
     pdf.text("Alt text helps users who rely on screen readers.", 16, 109);
 
     // Issue 2: Low Contrast Text
     pdf.setFontSize(12);
     pdf.setFont("helvetica", "normal");
-    pdf.setTextColor(0, 0, 0); // Black text
+    pdf.setTextColor(0, 0, 0);
     pdf.text(`2. Found ${report.issues['lowContrast'].length} issues with low contrast text.`, 10, 119);
     pdf.setFont("helvetica", "italic");
-    pdf.setTextColor(100, 100, 100); // Gray text
+    pdf.setTextColor(100, 100, 100);
     pdf.text("Adequate contrast makes text readable for everyone.", 16, 126);
 
     // Issue 3: Missing Form Labels
     pdf.setFontSize(12);
     pdf.setFont("helvetica", "normal");
-    pdf.setTextColor(0, 0, 0); // Black text
+    pdf.setTextColor(0, 0, 0);
     pdf.text(`3. Found ${report.issues['missingLabels'].length} forms with missing labels.`, 10, 136);
     pdf.setFont("helvetica", "italic");
-    pdf.setTextColor(100, 100, 100); // Gray text
+    pdf.setTextColor(100, 100, 100);
     pdf.text("Clearly labeled form controls help users complete forms easily.", 16, 143);
 
     // Issue 4: Non-Keyboard Accessible Elements
     pdf.setFontSize(12);
     pdf.setFont("helvetica", "normal");
-    pdf.setTextColor(0, 0, 0); // Black text
+    pdf.setTextColor(0, 0, 0);
     pdf.text(`4. Found ${report.issues['nonKeyboardAccessible'].length} elements not accessible by keyboard.`, 10, 153);
     pdf.setFont("helvetica", "italic");
-    pdf.setTextColor(100, 100, 100); // Gray text
+    pdf.setTextColor(100, 100, 100);
     pdf.text("Keyboard navigation is essential for users with motor impairments.", 16, 160);
 
 
     // Score Section
-    pdf.setFillColor('#046492'); 
-    pdf.roundedRect(10, 180, 190, 30,1.5,1.5, 'F');
+    pdf.setFillColor('#046492');
+    pdf.roundedRect(10, 180, 190, 30, 1.5, 1.5, 'F');
 
     pdf.setFontSize(20);
     pdf.setFont("helvetica", 'bold');
-    pdf.setTextColor(255, 255, 255); 
-    pdf.text(`Accessbility \nScore`, 20 , 193)
+    pdf.setTextColor(255, 255, 255);
+    pdf.text(`Accessbility \nScore`, 20, 193)
 
     pdf.setFontSize(50);
     pdf.setFont("helvetica", 'bold');
@@ -96,16 +96,16 @@ export default function createPDF(report) {
 
     pdf.setFontSize(16);
     pdf.setFont("helvetica", 'normal');
-    pdf.setTextColor(255, 255, 255); 
-    pdf.text(`Improving accessibilty helps\nall users and boosts SEO.`, 120 , 192)
-
-    
+    pdf.setTextColor(255, 255, 255);
+    pdf.text(`Improving accessibilty helps\nall users and boosts SEO.`, 120, 192)
 
 
 
-    
 
-    
+
+
+
+
 
 
     // Detailed Elements Section
