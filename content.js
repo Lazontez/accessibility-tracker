@@ -149,3 +149,7 @@ function findNonKeyboardAccessibleElements() {
     return issues;
 }
 
+function missingAria(){
+    
+}
+

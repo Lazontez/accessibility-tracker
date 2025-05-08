@@ -76,6 +76,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             "score": finalScore,
             "grade": grade
         };
-        createPDF(endResults);
+        const downloadButton = document.getElementById("download-report");
+        downloadButton.style.display = "inline"; 
+        downloadButton.addEventListener("click", () => createPDF(endResults));
     }
 });

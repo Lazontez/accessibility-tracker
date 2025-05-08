@@ -2,9 +2,9 @@ export default function createPDF(report) {
     console.log("Report Received:", report);
     const pdf = new window.jspdf.jsPDF();
 
-    // Add a gradient-like header background
-    pdf.setFillColor(22, 160, 133); // Teal color
-    pdf.rect(0, 0, 210, 30, 'F'); // Full-width rectangle for the header
+    // 
+    pdf.setFillColor('#046492'); 
+    pdf.rect(0, 0, 210, 32, 'F'); // Full-width rectangle for the header
 
     // Title Section
     pdf.setFont("helvetica", "bold");
@@ -30,6 +30,7 @@ export default function createPDF(report) {
     pdf.setFontSize(12);
     pdf.setFont("helvetica", "normal");
     pdf.text(`Issues Found: ${report.totalIssues}`, 10, 55);
+    // This is actually the total times this the accessibilityIssues function has been run
     pdf.text(`Times Scanned: ${report.pagesScanned}`, 10, 63);
     pdf.text(`Score: ${report.score}`, 10, 71);
     pdf.text(`Grade: ${report.grade}`, 10, 79);
@@ -81,7 +82,7 @@ export default function createPDF(report) {
 
 
     // Score Section
-    pdf.setFillColor(22, 160, 133); // Teal color
+    pdf.setFillColor('#046492'); 
     pdf.roundedRect(10, 180, 190, 30,1.5,1.5, 'F');
 
     pdf.setFontSize(20);
@@ -89,9 +90,9 @@ export default function createPDF(report) {
     pdf.setTextColor(255, 255, 255); 
     pdf.text(`Accessbility \nScore`, 20 , 193)
 
-    pdf.setFontSize(40);
+    pdf.setFontSize(50);
     pdf.setFont("helvetica", 'bold');
-    pdf.text(`${report.grade}`, 85, 197);
+    pdf.text(`${report.grade}`, 90, 200);
 
     pdf.setFontSize(16);
     pdf.setFont("helvetica", 'normal');
