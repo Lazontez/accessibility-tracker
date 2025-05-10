@@ -1,5 +1,3 @@
-console.log('Content Script Running')
-
 function findAccessibilityIssues() {
     const issues = {
         "missingAltText": findImagesWithoutAlt(),

@@ -1,5 +1,4 @@
 export default function createPDF(report) {
-    console.log("Report Received:", report);
     const pdf = new window.jspdf.jsPDF();
 
     // 
