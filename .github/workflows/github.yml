@@ -1,0 +1,13 @@
+name: Accessibility_Tracker_CLI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: node:lts
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install
+      - run: node main.js
