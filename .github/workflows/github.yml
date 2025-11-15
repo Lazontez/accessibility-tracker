@@ -9,5 +9,4 @@ jobs:
       image: node:lts
     steps:
       - uses: actions/checkout@v4
-      - run: npm install
-      - run: node main.js
+      - run: node -e 'console.log("Running")'
