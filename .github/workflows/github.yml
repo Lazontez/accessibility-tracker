@@ -6,7 +6,7 @@ name: Accessibility_Tracker_CLI
 # Test
 # Report
 
-stages: 
+stage: 
   - install
   - test
   - report
@@ -14,7 +14,7 @@ stages:
 
 run_test:
   image: node:lts
-  
+
   stage: test
   
   on: [push]
