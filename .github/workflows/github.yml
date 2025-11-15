@@ -1,24 +1,16 @@
-name: Accessibility_Tracker_CLI
-
-
-# Stages Planned
-# Install
-# Test
-# Report
-
-stages: 
-  - install
-  - test
-  - report
+on:
+  push:
 
 jobs:
-  run_test:
+  install_and_test:
+    runs-on: ubuntu-latest
 
-    image: node:lts
-    
-    on: [push]
-    
-    script: npm i
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
 
