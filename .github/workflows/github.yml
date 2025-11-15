@@ -11,15 +11,14 @@ stages:
   - test
   - report
 
+jobs:
+  run_test:
 
-run_test:
-  image: node:lts
-
-  stage: test
-  
-  on: [push]
-
-  script: npm i
+    image: node:lts
+    
+    on: [push]
+    
+    script: npm i
 
 
 
