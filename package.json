@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "test":"cypress run"
+  },
   "dependencies": {
     "cypress": "^15.6.0",
     "jspdf": "^3.0.1"
